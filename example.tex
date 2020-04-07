@@ -1,0 +1,68 @@
+\documentclass[expex]{cascadilla-xelatex-biblatex}
+
+\title{Using \texttt{cascadilla-xelatex-biblatex.cls}\thanks{András Bárány, Leiden University Centre for Linguistics,
+\url{a.barany@hum.leidenuniv.nl}. This class is heavily influenced by Max
+Bane's original \texttt{cascadilla.cls} class.}}
+
+\author{András Bárány}
+
+\begin{document}
+
+\maketitle
+
+\section{Section heading}
+
+\imsubsection{Immediate subsection heading}
+
+Some text.
+
+\subsection{Subsection following text}
+
+\imsubsubsection{Immediate subsubsection heading}
+
+Some more text.
+
+\section{Citing other work}
+
+\texttt{cascadilla-xelatex-biblatex.cls} uses \texttt{biblatex} and
+\texttt{biber}. The class uses the \texttt{biblatex} implementation of the
+Unified Style Sheet for
+Linguistics.\footnote{\url{https://github.com/semprag/biblatex-sp-unified/}}
+Note that the bibliography styles \textbf{do not come with the class}:
+please download them from \url{https://github.com/semprag/biblatex-sp-unified/}
+and place the \texttt{.cbx} and \texttt{.bbx} files in the folder of your
+document (or the relevant folder on your system).
+
+Here's an example in-text citation: \textcite{EKiss2008}. By default, the
+bibliography file is assumed to have the same name as the \texttt{.tex} file,
+in this case \texttt{example.bib}. To change this, use
+\verb+\addbibresource{...}+ to specify the location of your bibliography in
+your preamble.
+
+\section{Comparison to \texttt{cascadilla.cls}}
+
+This class is heavily influenced by Max Bane's
+\texttt{cascadilla.cls}\footnote{\url{https://github.com/maxbane/cascadilla.cls/}},
+but it uses \XeLaTeX{} and \texttt{biblatex} instead of (pdf)\LaTeX{} and
+\texttt{natbib} and is based on an arguably more recent version of the
+Cascadilla Proceedings Project style
+sheet.\footnote{\url{http://www.lingref.com/cpp/authors/style.html}}
+
+By default, the class uses the TeX Gyre Termes typeface instead of Times (or
+Times New Roman) as you might not have Times (or Times New Roman) installed on
+your system. If you want to use Times New Roman instead, you can use the option
+\texttt{timesnewroman} when specifying the document class. You can also use
+specify your own Times-like font in the preamble using the usual
+\texttt{fontspec} commands.
+
+\section{Using this class for Cascadilla proceedings}
+
+I started modifying Max Bane's original class for my own use. There's no
+guarantee or proof (yet) that a file created using the current class will be
+accepted for actual proceedings published by the Cascadilla Proceedings
+Project, but that's the aim.
+
+\printbibliography
+
+\end{document}
+

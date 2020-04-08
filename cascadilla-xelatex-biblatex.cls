@@ -20,8 +20,8 @@
 % This (Xe)LaTeX class provides a document class that aims to conform to the
 % requirements of the Cascadilla Proceedings Project
 % (http://www.lingref.com/cpp/authors/style.html), used for WCCFL proceedings,
-% for example. In contrast to Max Bane's existing cascadilla.cls, it is made to
-% be used with XeLaTeX and biblatex.
+% for example. In contrast to Max Bane's existing cascadilla.cls, it is
+% intended to be used with XeLaTeX and biblatex.
 %
 % Changes:
 % Version 0.1: Initial release.

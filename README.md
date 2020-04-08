@@ -1,10 +1,10 @@
-# What is this?
+## What is this?
 
 This project provides a LaTeX class aiming to implement the style sheet of the
 Cascadilla Proceedings Project
 (http://www.lingref.com/cpp/authors/style.html).
 
-# Who is this for?
+## Who is this for?
 
 If you are writing a paper for proceedings published by the Cascadilla
 Proceedings Project and you use XeLaTeX and biblatex, you will hopefully be
@@ -19,7 +19,7 @@ and I'll be fixing any issues that I come across in the process. Thus, there is
 no proof (yet) or guarantee that a paper typeset using this class will be
 accepted, but that's the aim.
 
-# License
+## License
 
 Published under The LaTeX Project Public License, Version 1.3c. See
 `LICENSE.TXT`.

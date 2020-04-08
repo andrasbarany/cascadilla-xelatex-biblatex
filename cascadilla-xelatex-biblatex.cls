@@ -39,6 +39,8 @@ Cascadilla Proceedings Project articles by András Bárány]
 
 \RequirePackage{polyglossia}
 \setdefaultlanguage{english}
+\RequirePackage{csquotes}
+\usepackage[autostyle=true,english=american]{csquotes}
 
 %% biblatex
 
@@ -172,8 +174,6 @@ Cascadilla Proceedings Project articles by András Bárány]
 \pagestyle{empty}
 
 % Headers according to style sheet
-
-\setkomafont{title}{\bfseries}
 
 % adapted from https://tex.stackexchange.com/questions/82850/change-the-title-size-in-scrartcl
 \makeatletter

@@ -21,5 +21,4 @@ accepted, but that's the aim.
 
 ## License
 
-Published under The LaTeX Project Public License, Version 1.3c. See
-`LICENSE.TXT`.
+See `LICENSE`.

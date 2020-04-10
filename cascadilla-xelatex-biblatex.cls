@@ -57,10 +57,11 @@ Cascadilla Proceedings Project articles by András Bárány]
         sortcites,
         maxcitenames=2]{biblatex}
 
+\newcommand{\blx@nowarnpolyglossia}{}
+
 %% fontspec and unicode-math
 
-\RequirePackage{mathtools}
-\RequirePackage[warnings-off={mathtools-colon,mathools-overbracket}]{unicode-math}
+\RequirePackage[warnings-off={mathtools-colon}]{unicode-math}
 \RequirePackage{fontspec}
 \defaultfontfeatures{Mapping=tex-text}
 \usepackage{xltxtra}
@@ -81,12 +82,12 @@ Cascadilla Proceedings Project articles by András Bárány]
 \newboolean{letter}
 \setboolean{letter}{false}
 
-\newboolean{termes}
-\setboolean{termes}{true}
+\newboolean{xits}
+\setboolean{xits}{true}
 \newboolean{timesnewroman}
 \setboolean{timesnewroman}{false}
 
-\DeclareOption{timesnewroman}{\setboolean{termes}{false}\setboolean{timesnewroman}{true}}
+\DeclareOption{timesnewroman}{\setboolean{xits}{false}\setboolean{timesnewroman}{true}}
 \DeclareOption{letter}{\setboolean{a4paper}{false}\setboolean{letter}{true}}
 
 \ProcessOptions*
@@ -115,14 +116,16 @@ Cascadilla Proceedings Project articles by András Bárány]
 
 % Typefaces
 
-\ifthenelse{\boolean{termes}}{%
-    \setromanfont[Numbers=Lining]{TeXGyreTermes-Regular}
-    \setmathfont{texgyretermes-math.otf}
+\ifthenelse{\boolean{xits}}{%
+    \setmainfont[BoldFont = XITS-Bold.otf,
+                 BoldItalicFont = XITS-BoldItalic.otf,
+                 ItalicFont = XITS-Italic.otf]{XITS-Regular.otf}
+    \setmathfont[BoldFont = XITSMath-Bold.otf]{XITSMath-Regular.otf}
 }
 
 \ifthenelse{\boolean{timesnewroman}}{%
     \setromanfont[Numbers=Lining]{Times New Roman}
-    \setmathfont{texgyretermes-math.otf}
+    \setmathfont{XITSMath-Regular.otf}
     \renewcommand{\textsc}[1]{{\addfontfeatures{FakeStretch=1.1,Scale=0.7}\MakeUppercase{#1}}}
 }
 

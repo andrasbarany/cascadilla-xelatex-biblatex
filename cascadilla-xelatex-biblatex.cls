@@ -39,8 +39,7 @@ Cascadilla Proceedings Project articles by András Bárány]
 
 \RequirePackage{polyglossia}
 \setdefaultlanguage{english}
-\RequirePackage{csquotes}
-\usepackage[autostyle=true,english=american]{csquotes}
+\RequirePackage[autostyle=true,english=american]{csquotes}
 
 %% biblatex
 

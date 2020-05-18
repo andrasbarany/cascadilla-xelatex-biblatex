@@ -225,3 +225,6 @@ Cascadilla Proceedings Project articles by András Bárány]
 
 % Captions
 \setkomafont{captionlabel}{\bfseries}
+
+% Other packages
+\usepackage{booktabs}

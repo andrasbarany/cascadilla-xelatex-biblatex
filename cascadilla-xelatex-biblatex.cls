@@ -39,6 +39,7 @@ Cascadilla Proceedings Project articles by András Bárány]
         backref=false,
         maxbibnames=9,
         sortcites,
+        sorting=ynt,
         maxcitenames=2]{biblatex}
 
 \newcommand{\blx@nowarnpolyglossia}{}
@@ -120,7 +121,7 @@ Cascadilla Proceedings Project articles by András Bárány]
 
 %% use filename.bib as default source
 
-\addbibresource{\jobname.bib}
+%\addbibresource{\jobname.bib}
 
 %% add citeposs command: Lastname's (year)
 

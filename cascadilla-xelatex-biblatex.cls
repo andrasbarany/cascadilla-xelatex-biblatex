@@ -41,6 +41,9 @@ Cascadilla Proceedings Project articles by András Bárány]
         sorting=ynt,
         maxcitenames=2]{biblatex}
 
+% Remove "p(p)." prefix
+\DeclareFieldFormat{postnote}{#1} % no postnote prefix in "normal" citation commands
+
 \newcommand{\blx@nowarnpolyglossia}{}
 
 %% fontspec and unicode-math

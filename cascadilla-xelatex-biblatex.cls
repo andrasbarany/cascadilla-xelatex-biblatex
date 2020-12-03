@@ -198,9 +198,9 @@ Cascadilla Proceedings Project articles by András Bárány]
     afterskip=10pt,
 ]{subsubsection}
 
-\setkomafont{subsection}{\fontsize{11pt}{13pt}\normalfont\bfseries\itshape}
+\setkomafont{subsection}{\fontsize{11pt}{13pt}\normalfont\itshape}
 \renewcommand*{\subsectionformat}{\thesubsection\autodot\ \relax}
-\setkomafont{subsubsection}{\fontsize{11pt}{13pt}\normalfont\bfseries\itshape}
+\setkomafont{subsubsection}{\fontsize{11pt}{13pt}\normalfont\itshape}
 \renewcommand*{\subsubsectionformat}{\thesubsubsection\autodot\ \relax}
 
 \newcommand{\imsubsection}[1]{

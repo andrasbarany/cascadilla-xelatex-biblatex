@@ -36,11 +36,11 @@ Example:
 \documentclass[letter]{cascadilla-xelatex-biblatex.cls}
 ```
 
-If you use `xelatex` you can also specify `xits` (default) or `timesnewroman`.
+If you use XeLaTeX you can also specify `xits` (default) or `timesnewroman`.
 The (XITS typeface)[https://github.com/alif-type/xits] is an OpenType
 implementation of STIX/Times (New Roman) with Math support.
 
-When compiling with `pdflatex`, the `newtxtext` package is used.
+When compiling with pdfLaTeX, the `newtxtext` package is used.
 
 ## Requirements
 

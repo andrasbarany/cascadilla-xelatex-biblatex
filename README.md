@@ -11,7 +11,7 @@ Proceedings Project, you should be able to submit a properly typeset version
 using this class. 
 
 There is an existing LaTeX-class for Cascadilla proceedings, Max Bane's
-`cascadilla.cls` (https://github.com/maxbane/cascadilla.cls/).
+`cascadilla.cls` (https://github.com/maxbane/cascadilla.cls).
 
 The current class uses some more up-to-date packages and crucially
 **`biblatex`** and **`biber`** instead of `bibtex`/`natbib`. `biblatex` and
@@ -37,7 +37,7 @@ Example:
 ```
 
 If you use XeLaTeX you can also specify `xits` (default) or `timesnewroman`.
-The (XITS typeface)[https://github.com/alif-type/xits] is an OpenType
+The [XITS typeface](https://github.com/alif-type/xits) is an OpenType
 implementation of STIX/Times (New Roman) with Math support.
 
 When compiling with pdfLaTeX, the `newtxtext` package is used.

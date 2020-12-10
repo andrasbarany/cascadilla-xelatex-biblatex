@@ -21,9 +21,17 @@ Cascadilla Proceedings Project articles by András Bárány]
 
 \LoadClass[10pt,numbers=enddot]{scrartcl}
 
-\RequirePackage{polyglossia}
-\setdefaultlanguage{english}
-\RequirePackage[autostyle=true,english=american]{csquotes}
+%% checking for XeLaTeX
+
+\usepackage{iftex}
+\ifxetex
+    \RequirePackage{polyglossia}
+    \setdefaultlanguage{english}
+    \RequirePackage[autostyle=true,english=american]{csquotes}
+\else
+    \RequirePackage[english]{babel}
+    \usepackage[utf8]{inputenc}
+\fi
 
 %% biblatex
 
@@ -48,10 +56,13 @@ Cascadilla Proceedings Project articles by András Bárány]
 
 %% fontspec and unicode-math
 
-\RequirePackage[warnings-off={mathtools-colon}]{unicode-math}
-\RequirePackage{fontspec}
-\defaultfontfeatures{Mapping=tex-text}
-\usepackage{xltxtra}
+\ifxetex
+    \RequirePackage[warnings-off={mathtools-colon}]{unicode-math}
+    \RequirePackage{fontspec}
+    \defaultfontfeatures{Mapping=tex-text}
+    \usepackage{xltxtra}
+\fi
+\usepackage{hologo}
 
 \RequirePackage{geometry}
 \RequirePackage{indentfirst}
@@ -103,18 +114,23 @@ Cascadilla Proceedings Project articles by András Bárány]
 
 % Typefaces
 
-\ifthenelse{\boolean{xits}}{%
-    \setmainfont[BoldFont = XITS-Bold.otf,
-                 BoldItalicFont = XITS-BoldItalic.otf,
-                 ItalicFont = XITS-Italic.otf]{XITS-Regular.otf}
-    \setmathfont[BoldFont = XITSMath-Bold.otf]{XITSMath-Regular.otf}
-}
+\ifxetex
+    \ifthenelse{\boolean{xits}}{%
+        \setmainfont[BoldFont = XITS-Bold.otf,
+                     BoldItalicFont = XITS-BoldItalic.otf,
+                     ItalicFont = XITS-Italic.otf]{XITS-Regular.otf}
+        \setmathfont[BoldFont = XITSMath-Bold.otf]{XITSMath-Regular.otf}
+    }
 
-\ifthenelse{\boolean{timesnewroman}}{%
-    \setromanfont[Numbers=Lining]{Times New Roman}
-    \setmathfont{XITSMath-Regular.otf}
-    \renewcommand{\textsc}[1]{{\addfontfeatures{FakeStretch=1.1,Scale=0.7}\MakeUppercase{#1}}}
-}
+    \ifthenelse{\boolean{timesnewroman}}{%
+        \setromanfont[Numbers=Lining]{Times New Roman}
+        \setmathfont{XITSMath-Regular.otf}
+        \renewcommand{\textsc}[1]{{\addfontfeatures{FakeStretch=1.1,Scale=0.7}\MakeUppercase{#1}}}
+    }
+\else
+    \usepackage{newtxtext}
+    \usepackage{newtxmath}
+\fi
 
 % biblatex tweaks
 
@@ -123,7 +139,7 @@ Cascadilla Proceedings Project articles by András Bárány]
 
 %% use filename.bib as default source
 
-%\addbibresource{\jobname.bib}
+\addbibresource{\jobname.bib}
 
 %% add citeposs command: Lastname's (year)
 
@@ -231,3 +247,6 @@ Cascadilla Proceedings Project articles by András Bárány]
 
 % Other packages
 \usepackage{booktabs}
+
+% No links in PDF
+\usepackage[unicode,hidelinks,draft]{hyperref}

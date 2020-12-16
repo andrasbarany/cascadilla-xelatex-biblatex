@@ -9,7 +9,7 @@
 %
 % Changes:
 % Version 0.1: Initial release.
-%   -   First implementation of style CCP style sheet.
+%   -   First implementation of CPP style sheet.
 
 %%% Identification
 

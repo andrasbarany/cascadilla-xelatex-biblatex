@@ -1,11 +1,22 @@
 \documentclass{cascadilla-xelatex-biblatex}
 
+\usepackage{listings}
+\usepackage{xcolor}
+\lstset{
+    backgroundcolor=\color{gray!10!white},
+    language=TeX,
+    basicstyle=\ttfamily,
+    literate={á}{{\'a}}1
+}
+
 \title{Using \texttt{cascadilla-xelatex-biblatex.cls}\thanks{András Bárány,
         Bielefeld University,
 \url{andras.barany@uni-bielefeld.de}. This class is heavily influenced by Max
 Bane's original \texttt{cascadilla.cls} class.}}
 
 \author{András Bárány}
+
+\addbibresource{example.bib}
 
 \begin{document}
 
@@ -23,7 +34,75 @@ Some text.
 
 Some more text.
 
-\section{Citing other work}
+\section{Basics and class options}
+
+This class is heavily influenced by Max Bane's
+\texttt{cascadilla.cls}\footnote{\url{https://github.com/maxbane/cascadilla.cls/}},
+but it can be used with \hologo{XeLaTeX} instead of (pdf)\hologo{LaTeX}.
+
+A bigger change is that the class obligatorily uses
+\texttt{biblatex}/\hologo{biber} instead of \texttt{natbib}. \texttt{biblatex}
+and \hologo{biber} are being actively developed. The main thing that changes
+for users is that to compile the bibliography, one has to use the
+\texttt{biber} command rather than the \texttt{bibtex} command. You can use the
+same citation commands you used with \texttt{natbib}/\texttt{bibtex}. See
+also~\Cref{sec:bib}.
+
+Finally, the class is based on a more recent version of the Cascadilla
+Proceedings Project style
+sheet.\footnote{\url{http://www.lingref.com/cpp/authors/style.html}}
+
+\subsection{Specifying the title and author(s)}
+
+You can use the usual \verb+\title{...}+ and \verb+\author{...}+ commands to
+specify the title and author(s) of your paper. The starred footnote seen at the
+bottom of this page is added using the command \verb+\thanks{...}+. For the
+present document, this looks as follows:
+
+\begin{lstlisting}
+\title{Using \texttt{cascadilla-xelatex-biblatex.cls}%
+    \thanks{András Bárány, Bielefeld University,
+    \url{andras.barany@uni-bielefeld.de}. This class is heavily
+    influenced by Max Bane's original \texttt{cascadilla.cls} class.}}
+
+\author{András Bárány}
+\end{lstlisting}
+
+Title and author(s) are added to the document using \verb+\maketitle+, as
+usual.
+
+\subsection{Options}
+\imsubsubsection{XITS vs. Times}
+
+When using \hologo{XeLaTeX}, the class uses the XITS fonts by default, instead
+of Times (or Times New Roman) as you might not have Times (or Times New Roman)
+installed on your system (I don't). If you want to use Times New Roman instead,
+you can use the option \texttt{times} when specifying the document class. You
+can also use specify your own Times-like font in the preamble using the usual
+\texttt{fontspec} commands.
+
+\subsubsection{A4 vs.\ letter}
+
+You can choose between A4 and letter paper formats. By default, A4 is used, you
+can change this by adding the \texttt{letter} option when loading the class.
+
+\subsubsection{Packages for linguistic examples}
+
+I use \texttt{expex}\footnote{\url{https://ctan.org/pkg/expex}} but you can use
+\texttt{gb4e}\footnote{\url{https://www.ctan.org/pkg/gb4e}} or
+\texttt{linguex}\footnote{\url{https://www.ctan.org/pkg/linguex}} by specifying
+the relevant options.
+
+\subsection{Specifying options}\label{sub:ex}
+
+To load the class with particular options, edit the class call. The following
+lines would load the class with the \texttt{letter} and \texttt{gb4e} options.
+
+\begin{lstlisting}
+\documentclass[letter,gb4e]{cascadilla-xelatex-biblatex}
+\end{lstlisting}
+
+\section{Citing other work}\label{sec:bib}
 
 \texttt{cascadilla-xelatex-biblatex.cls} uses \texttt{biblatex} and
 \texttt{biber}. The class uses the \texttt{biblatex} implementation of the
@@ -34,36 +113,22 @@ download them from \url{https://github.com/semprag/biblatex-sp-unified/} and
 place the \texttt{.cbx} and \texttt{.bbx} files in the folder of your document
 (or the relevant folder on your system).
 
-Here's an example in-text citation: \textcite{EKiss2008}. By default, the
-bibliography file is assumed to have the same name as the \texttt{.tex} file,
-in this case \texttt{example.bib}. To change this, use
-\verb+\addbibresource{...}+ to specify the location of your bibliography in
-your preamble.
+Here's an example of an in-text citation: \textcite{EKiss2008}. The
+bibliography file is specified by the \verb+\addbibresource{...}+ command in the
+preamble of a document. In the current file, this looks as follows:
 
-\section{Comparison to \texttt{cascadilla.cls}}
-
-This class is heavily influenced by Max Bane's
-\texttt{cascadilla.cls}\footnote{\url{https://github.com/maxbane/cascadilla.cls/}},
-but it (optionally) uses \hologo{XeLaTeX} and instead of (pdf)\hologo{LaTeX}
-and (obligatorily) \texttt{biblatex}/\hologo{biber} instead of \texttt{natbib}
-
-It is also based on an arguably more recent version of the Cascadilla
-Proceedings Project style
-sheet.\footnote{\url{http://www.lingref.com/cpp/authors/style.html}}
-
-By default, the class uses the XITS fonts instead of Times (or Times New Roman)
-as you might not have Times (or Times New Roman) installed on your system (I
-don't). If you want to use Times New Roman instead, you can use the option
-\texttt{timesnewroman} when specifying the document class. You can also use
-specify your own Times-like font in the preamble using the usual
-\texttt{fontspec} commands.
+\begin{lstlisting}
+\addbibresource{example.bib}
+\end{lstlisting}
 
 \section{Using this class for Cascadilla proceedings}
 
-I started modifying Max Bane's original class for my own use. There's no
-guarantee or proof (yet) that a file created using the current class will be
-accepted for actual proceedings published by the Cascadilla Proceedings
-Project, but that's the aim.
+I started modifying Max Bane's original class for my own use. While there is no
+guarantee that a file created using the current class will be \emph{definitely}
+be accepted for actual proceedings published by the Cascadilla Proceedings
+Project, it has worked for me at least once. In addition, the class has now (as
+of January 2021) been checked by editors at Cascadilla Proceedings Press and is
+linked to on their website.
 
 \printbibliography
 

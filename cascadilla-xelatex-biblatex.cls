@@ -10,11 +10,17 @@
 % Changes:
 % Version 0.1: Initial release.
 %   -   First implementation of CPP style sheet.
+% Version 1.0:
+%   -   Added automatic XeLaTeX / pdfLaTeX recognition.
+%   -   Added options for packages.
+%   -   Tweaked margins and spacing (raggedbottom).
+%   -   Updated documentation.
+%   -   Checked with CPP for approval.
 
 %%% Identification
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{cascadilla-xelatex-biblatex}[2020/04/07 v0.1 Class for
+\ProvidesClass{cascadilla-xelatex-biblatex}[2021/01/08 v1.0 Class for
 Cascadilla Proceedings Project articles by András Bárány]
 
 %%% Declarations
@@ -25,13 +31,17 @@ Cascadilla Proceedings Project articles by András Bárány]
 
 \usepackage{iftex}
 \ifxetex
-    \RequirePackage{polyglossia}
-    \setdefaultlanguage{english}
-    \RequirePackage[autostyle=true,english=american]{csquotes}
+    \RequirePackage[warnings-off={mathtools-colon}]{unicode-math}
+    \RequirePackage{fontspec}
+    \defaultfontfeatures{Mapping=tex-text}
+    \usepackage{xltxtra}
 \else
-    \RequirePackage[english]{babel}
     \usepackage[utf8]{inputenc}
 \fi
+
+%% language(s)
+
+\usepackage[english]{babel}
 
 %% biblatex
 
@@ -47,6 +57,7 @@ Cascadilla Proceedings Project articles by András Bárány]
         maxbibnames=9,
         sortcites,
         sorting=ynt,
+        natbib=true,
         maxcitenames=2]{biblatex}
 
 % Remove "p(p)." prefix
@@ -56,12 +67,6 @@ Cascadilla Proceedings Project articles by András Bárány]
 
 %% fontspec and unicode-math
 
-\ifxetex
-    \RequirePackage[warnings-off={mathtools-colon}]{unicode-math}
-    \RequirePackage{fontspec}
-    \defaultfontfeatures{Mapping=tex-text}
-    \usepackage{xltxtra}
-\fi
 \usepackage{hologo}
 
 \RequirePackage{geometry}
@@ -82,11 +87,20 @@ Cascadilla Proceedings Project articles by András Bárány]
 
 \newboolean{xits}
 \setboolean{xits}{true}
-\newboolean{timesnewroman}
-\setboolean{timesnewroman}{false}
+\newboolean{times}
+\setboolean{times}{false}
 
-\DeclareOption{timesnewroman}{\setboolean{xits}{false}\setboolean{timesnewroman}{true}}
+\newboolean{noexpex}
+\setboolean{noexpex}{false}
+\newboolean{uselinguex}
+\setboolean{uselinguex}{false}
+\newboolean{usegb4e}
+\setboolean{usegb4e}{false}
+
+\DeclareOption{times}{\setboolean{xits}{false}\setboolean{times}{true}}
 \DeclareOption{letter}{\setboolean{a4paper}{false}\setboolean{letter}{true}}
+\DeclareOption{uselinguex}{\setboolean{noexpex}{true}\setboolean{usegb4e}{false}\setboolean{uselinguex}{true}}
+\DeclareOption{usegb4e}{\setboolean{noexpex}{true}\setboolean{uselinguex}{false}\setboolean{usegb4e}{true}}
 
 \ProcessOptions*
 
@@ -112,6 +126,8 @@ Cascadilla Proceedings Project articles by András Bárány]
           bottom=1in}
 }
 
+\raggedbottom
+
 % Typefaces
 
 \ifxetex
@@ -122,7 +138,7 @@ Cascadilla Proceedings Project articles by András Bárány]
         \setmathfont[BoldFont = XITSMath-Bold.otf]{XITSMath-Regular.otf}
     }
 
-    \ifthenelse{\boolean{timesnewroman}}{%
+    \ifthenelse{\boolean{times}}{%
         \setromanfont[Numbers=Lining]{Times New Roman}
         \setmathfont{XITSMath-Regular.otf}
         \renewcommand{\textsc}[1]{{\addfontfeatures{FakeStretch=1.1,Scale=0.7}\MakeUppercase{#1}}}
@@ -132,14 +148,65 @@ Cascadilla Proceedings Project articles by András Bárány]
     \usepackage{newtxmath}
 \fi
 
+% Example packages
+
+\ifthenelse{\boolean{noexpex}}{}{%
+    \RequirePackage{expex}
+	\lingset{numoffset=1em,everygla=,aboveglftskip=0ex,belowglpreambleskip=0ex}
+    \usepackage{etoolbox}
+    % Fixing expex and unicode-math
+    \let\expexgla\gla                   % unicode-math has a “gla” command ---
+    \AtBeginDocument{\let\gla\expexgla} % we redefine the expex one, and define
+                                        % it back at the beginning of the document
+
+}
+
+\ifthenelse{\boolean{usegb4e}}{%
+	\RequirePackage{gb4e}
+	\def\glt{}
+	\def\trans{}
+
+	\def\@exe[#1]{%
+		\ifnum \@xnumdepth >0%
+	    	\if@xrec\@exrecwarn\fi%
+	        \if@noftnote\@exrecwarn\fi%
+	        \@xnumdepth0\@listdepth0\@xrectrue%
+	        \save@counters%
+	    \fi%
+	    \advance\@xnumdepth \@ne \@@xsi%
+	    \begin{list}{(\thexnumi)}%
+	    	{\usecounter{xnumi}\@subex{#1}{1em}%
+	        \if@noftnote%
+	           \setcounter{xnumi}{\value{exx}}%
+	        \else%
+	           \setcounter{xnumi}{\value{fnx}}%
+	        \fi
+	        \setlength{\topsep}{\baselineskip}\relax
+	        \setlength{\itemsep}{\baselineskip}\relax
+	    	}
+	}
+}
+
+\ifthenelse{\boolean{uselinguex}}{%
+	\RequirePackage{linguex}
+    \renewcommand{\resetExdefaults}{%
+        \setlength{\Exlabelsep}{0.6em}%
+        \setlength{\Extopsep}{\baselineskip}%
+        \setlength{\SubSubExleftmargin}{2.4em}%
+        \setlength{\SubExleftmargin}{2em}%
+        \setlength{\Exindent}{1em}%
+        \setlength{\Exlabelwidth}{3em}%
+        \setlength{\alignSubExnegindent}{\Exlabelsep}%
+        \ifalignSubEx\addtolength{\Exlabelsep}{.7em}%
+            \addtolength{\alignSubExnegindent}{.7em}\fi
+        \setlength{\Exredux}{-\baselineskip}%
+    }
+}
+
 % biblatex tweaks
 
 %% indentation
 \setlength{\bibhang}{.25in}
-
-%% use filename.bib as default source
-
-\addbibresource{\jobname.bib}
 
 %% add citeposs command: Lastname's (year)
 
@@ -197,8 +264,8 @@ Cascadilla Proceedings Project articles by András Bárány]
 \setcounter{secnumdepth}{3}
 \DeclareSectionCommand[
     afterindent=true,
-    beforeskip=10pt,
-    afterskip=10pt,
+    beforeskip=\baselineskip,
+    afterskip=\baselineskip,
 ]{section}
 
 \setkomafont{section}{\large\normalfont\bfseries}
@@ -206,14 +273,14 @@ Cascadilla Proceedings Project articles by András Bárány]
 
 \DeclareSectionCommand[
     afterindent=true,
-    beforeskip=10pt,
-    afterskip=10pt,
+    beforeskip=\baselineskip,
+    afterskip=\baselineskip,
 ]{subsection}
 
 \DeclareSectionCommand[
     afterindent=true,
-    beforeskip=10pt,
-    afterskip=10pt,
+    beforeskip=\baselineskip,
+    afterskip=\baselineskip,
 ]{subsubsection}
 
 \setkomafont{subsection}{\fontsize{11pt}{13pt}\normalfont\itshape}
@@ -245,8 +312,10 @@ Cascadilla Proceedings Project articles by András Bárány]
 % Captions
 \setkomafont{captionlabel}{\bfseries}
 
+% No links
+\usepackage[unicode,hidelinks,draft]{hyperref}
+
 % Other packages
 \usepackage{booktabs}
-
-% No links in PDF
-\usepackage[unicode,hidelinks,draft]{hyperref}
+\usepackage{csquotes}
+\usepackage{cleveref}

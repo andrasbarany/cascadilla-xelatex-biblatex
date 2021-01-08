@@ -69,6 +69,16 @@ use of the `biblatex-unified` style
 `unified.bbx` and `unified.cbx` styles from there and follow the instructions
 provided.
 
+## Using the class
+
+To use the class, you have several options. You can download the class file
+(`cascadilla-xelatex-biblatex.cls`) and place it in your document's folder (or
+your system's LaTeX folder.
+
+I've also made the files available on [overleaf
+project](https://www.overleaf.com/read/wtmgnscdvwrt). You can simply copy them
+into your own project and work with the existing template.
+
 ## License
 
 See `LICENSE`.

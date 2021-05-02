@@ -1,12 +1,9 @@
-\documentclass{cascadilla-xelatex-biblatex}
+\documentclass[usegb4e]{cascadilla-xelatex-biblatex}
 
-\usepackage{listings}
-\usepackage{xcolor}
-\lstset{
-    backgroundcolor=\color{gray!10!white},
-    language=TeX,
-    basicstyle=\ttfamily,
-    literate={á}{{\'a}}1
+\ifthenelse{\boolean{usegb4e}}{}{%
+    \usepackage{xcolor}
+    \usepackage{mdframed}
+    \surroundwithmdframed[backgroundcolor=gray!10!white]{verbatim}
 }
 
 \title{Using \texttt{cascadilla-xelatex-biblatex.cls}\thanks{András Bárány,
@@ -59,14 +56,14 @@ specify the title and author(s) of your paper. The starred footnote seen at the
 bottom of this page is added using the command \verb+\thanks{...}+. For the
 present document, this looks as follows:
 
-\begin{lstlisting}
+\begin{verbatim}
 \title{Using \texttt{cascadilla-xelatex-biblatex.cls}%
     \thanks{András Bárány, Bielefeld University,
     \url{andras.barany@uni-bielefeld.de}. This class is heavily
     influenced by Max Bane's original \texttt{cascadilla.cls} class.}}
 
 \author{András Bárány}
-\end{lstlisting}
+\end{verbatim}
 
 Title and author(s) are added to the document using \verb+\maketitle+, as
 usual.
@@ -98,9 +95,9 @@ the relevant options.
 To load the class with particular options, edit the class call. The following
 lines would load the class with the \texttt{letter} and \texttt{gb4e} options.
 
-\begin{lstlisting}
+\begin{verbatim}
 \documentclass[letter,gb4e]{cascadilla-xelatex-biblatex}
-\end{lstlisting}
+\end{verbatim}
 
 \section{Citing other work}\label{sec:bib}
 
@@ -117,9 +114,9 @@ Here's an example of an in-text citation: \textcite{EKiss2008}. The
 bibliography file is specified by the \verb+\addbibresource{...}+ command in the
 preamble of a document. In the current file, this looks as follows:
 
-\begin{lstlisting}
+\begin{verbatim}
 \addbibresource{example.bib}
-\end{lstlisting}
+\end{verbatim}
 
 \section{Using this class for Cascadilla proceedings}
 

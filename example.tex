@@ -1,4 +1,4 @@
-\documentclass[usegb4e]{cascadilla-xelatex-biblatex}
+\documentclass{cascadilla-xelatex-biblatex}
 
 \ifthenelse{\boolean{usegb4e}}{}{%
     \usepackage{xcolor}
@@ -110,9 +110,10 @@ download them from \url{https://github.com/semprag/biblatex-sp-unified/} and
 place the \texttt{.cbx} and \texttt{.bbx} files in the folder of your document
 (or the relevant folder on your system).
 
-Here's an example of an in-text citation: \textcite{EKiss2008}. The
-bibliography file is specified by the \verb+\addbibresource{...}+ command in the
-preamble of a document. In the current file, this looks as follows:
+Here are examples of in-text citations: \textcite{Yuan2021} and
+\textcite{EKiss2008}. The bibliography file is specified by the
+\verb+\addbibresource{...}+ command in the preamble of a document. In the
+current file, this looks as follows:
 
 \begin{verbatim}
 \addbibresource{example.bib}
@@ -127,6 +128,7 @@ Project, it has worked for me at least once. In addition, the class has now (as
 of January 2021) been checked by editors at Cascadilla Proceedings Press and is
 linked to on their website.
 
+\newrefcontext[sorting=nyt]
 \printbibliography
 
 \end{document}

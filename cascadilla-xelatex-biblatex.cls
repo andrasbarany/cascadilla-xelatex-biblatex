@@ -55,8 +55,8 @@ Cascadilla Proceedings Project articles by András Bárány]
         mincrossrefs=3,
         backref=false,
         maxbibnames=9,
-        sortcites,
-        sorting=ynt,
+%        sortcites,     % uncomment for automatic sorting of citations
+        sorting=nyt,
         natbib=true,
         maxcitenames=2]{biblatex}
 

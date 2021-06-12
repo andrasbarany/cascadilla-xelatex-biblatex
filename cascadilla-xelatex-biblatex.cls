@@ -34,7 +34,7 @@ Cascadilla Proceedings Project articles by András Bárány]
     \RequirePackage[warnings-off={mathtools-colon}]{unicode-math}
     \RequirePackage{fontspec}
     \defaultfontfeatures{Mapping=tex-text}
-    \usepackage{xltxtra}
+    \usepackage[no-sscript]{xltxtra}
 \else
     \usepackage[utf8]{inputenc}
 \fi

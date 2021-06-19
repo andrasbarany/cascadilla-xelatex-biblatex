@@ -26,6 +26,11 @@ the WCCFL editors.
 However, there is no guarantee that a paper typeset using this class will be
 accepted. You can contact me if you run into any trouble.
 
+## Recent fixes
+
+- I made sorting more reliable. The bibliography should now be sorted
+  alphabetically.
+
 ## Package options
 
 ### Paper size

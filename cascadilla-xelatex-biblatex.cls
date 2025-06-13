@@ -28,7 +28,6 @@ Cascadilla Proceedings Project articles by András Bárány]
 \LoadClass[10pt,numbers=enddot]{scrartcl}
 
 %% checking for XeLaTeX
-
 \usepackage{iftex}
 \ifxetex
     \RequirePackage[warnings-off={mathtools-colon}]{unicode-math}
@@ -36,7 +35,13 @@ Cascadilla Proceedings Project articles by András Bárány]
     \defaultfontfeatures{Mapping=tex-text}
     \usepackage[no-sscript]{xltxtra}
 \else
-    \usepackage[utf8]{inputenc}
+    \ifluatex
+        \usepackage{mathtools}  % for bmatrix
+        \RequirePackage[warnings-off={mathtools-colon,mathtools-overbracket}]{unicode-math}
+        \RequirePackage{fontspec}
+    \else
+        \usepackage[utf8]{inputenc}
+    \fi
 \fi
 
 %% language(s)
@@ -144,8 +149,14 @@ Cascadilla Proceedings Project articles by András Bárány]
         \renewcommand{\textsc}[1]{{\addfontfeatures{FakeStretch=1.1,Scale=0.7}\MakeUppercase{#1}}}
     }
 \else
-    \usepackage{newtxtext}
-    \usepackage{newtxmath}
+    \ifluatex
+        \setmainfont{Times New Roman}
+        \setmathfont{XITSMath-Regular.otf}
+        \renewcommand{\textsc}[1]{{\addfontfeatures{FakeStretch=1.1,Scale=0.7}\MakeUppercase{#1}}}
+    \else
+        \usepackage{newtxtext}
+        \usepackage{newtxmath}
+    \fi
 \fi
 
 % Example packages
@@ -313,7 +324,7 @@ Cascadilla Proceedings Project articles by András Bárány]
 \setkomafont{captionlabel}{\bfseries}
 
 % No links
-\usepackage[unicode,hidelinks,draft]{hyperref}
+\usepackage[unicode,hidelinks]{hyperref}
 
 % Other packages
 \usepackage{booktabs}

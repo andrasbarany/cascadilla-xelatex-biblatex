@@ -16,6 +16,8 @@
 %   -   Tweaked margins and spacing (raggedbottom).
 %   -   Updated documentation.
 %   -   Checked with CPP for approval.
+% Version 1.1:
+%   -   Modified spacing for linguex.
 
 %%% Identification
 
@@ -212,6 +214,8 @@ Cascadilla Proceedings Project articles by András Bárány]
             \addtolength{\alignSubExnegindent}{.7em}\fi
         \setlength{\Exredux}{-\baselineskip}%
     }
+    % better spacing --- added on 13/06/2025
+    \AtBeginDocument{\setlength{\Extopsep}{\baselineskip}}
 }
 
 % biblatex tweaks
